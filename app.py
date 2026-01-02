@@ -1,12 +1,28 @@
+# Core
 import streamlit as st
 import os
+
+# Document loaders (PDF)
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+# Text splitting
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+# LLM
 from langchain_groq import ChatGroq
-from langchain_community.vectorstores import FAISS
+
+# Vectorstore
+from langchain.vectorstores import FAISS
+
+# Chains / RAG
 from langchain.chains.retrieval import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_core.prompts import ChatPromptTemplate
+
+# Prompts
+from langchain.prompts import ChatPromptTemplate
+
+# Embeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 #UI
 st.set_page_config(page_title="RAG_CHATBOT | PDF Chat", page_icon="🔮")
@@ -49,7 +65,9 @@ def create_knowledge_base(pdfs, key):
     final_chunks = text_splitter.split_documents(all_docs)
 
     # Embed & Store: Convert text to math (vectors) and save in FAISS
-    embeddings = OpenAIEmbeddings(openai_api_key=key)
+    embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+    )
     vectorstore = FAISS.from_documents(final_chunks, embeddings)
     return vectorstore.as_retriever()
 
