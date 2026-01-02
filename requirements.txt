@@ -1,5 +1,5 @@
 streamlit
-langchain
+langchain==0.2.6
 langchain-community
 langchain-openai
 PyPDF2
