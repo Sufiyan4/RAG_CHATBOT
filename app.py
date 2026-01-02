@@ -2,7 +2,7 @@ import streamlit as st
 import os
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_groq import ChatGroq
 from langchain_community.vectorstores import FAISS
 from langchain.chains.retrieval import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -73,7 +73,10 @@ if prompt := st.chat_input("Ask a question about your PDFs"):
             with st.spinner("RAG_CHATBOT is scanning documents..."):
                 try:
                     # Initialize Brain
-                    llm = ChatOpenAI(model="gpt-4o-mini", openai_api_key=api_key)
+                    llm = ChatGroq(
+                     api_key=st.secrets["GROQ_API_KEY"],
+                        model="llama3-8b-8192"
+                          )
                     
                     if uploaded_pdfs:
                         # RAG Pipeline
