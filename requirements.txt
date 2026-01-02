@@ -1,7 +1,7 @@
 streamlit
 langchain==0.2.6
 langchain-community
-langchain-openai
+langchain-groq
 PyPDF2
 openai
 pdfplumber
