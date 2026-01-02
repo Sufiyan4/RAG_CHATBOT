@@ -9,7 +9,7 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 
 #UI
-st.set_page_config(page_title="MiRAG | PDF Chat", page_icon="🔮")
+st.set_page_config(page_title="RAG_CHATBOT | PDF Chat", page_icon="🔮")
 
 st.markdown("""
     <style>
@@ -17,8 +17,8 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.title("🔮 MiRAG")
-st.markdown("<div class='developer-tag'>Developed By HasMir</div>", unsafe_allow_html=True)
+st.title("🔮 RAG_CHATBOT")
+st.markdown("<div class='developer-tag'>Developed By Sufiyan&Ayaz</div>", unsafe_allow_html=True)
 st.markdown("---")
 
 #SIDEBAR
@@ -70,7 +70,7 @@ if prompt := st.chat_input("Ask a question about your PDFs"):
         st.chat_message("user").write(prompt)
 
         with st.chat_message("assistant"):
-            with st.spinner("MiRAG is scanning documents..."):
+            with st.spinner("RAG_CHATBOT is scanning documents..."):
                 try:
                     # Initialize Brain
                     llm = ChatOpenAI(model="gpt-4o-mini", openai_api_key=api_key)
@@ -80,7 +80,7 @@ if prompt := st.chat_input("Ask a question about your PDFs"):
                         retriever = create_knowledge_base(uploaded_pdfs, api_key)
                         
                         system_prompt = (
-                            "You are MiRAG, a precise document assistant. "
+                            "You are RAG_CHATBOT, a precise document assistant. "
                             "Use the context below to answer. If the answer isn't in the context, "
                             "say you don't know based on the files provided.\n\n{context}"
                         )
