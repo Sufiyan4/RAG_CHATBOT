@@ -1,22 +1,14 @@
 import streamlit as st
-from langchain_groq import ChatGroq
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.chains.retrieval import create_retrieval_chain
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain.vectorstores import FAISS
 
-st.title("📄 PDF RAG Chatbot with Groq LLM")
+st.title("📄 Minimal PDF RAG Chatbot")
 
-# LLM Initialization
-llm = ChatGroq(
-    api_key=st.secrets["GROQ_API_KEY"],
-    model="llama3-8b-8192"
-)
-
-# Embeddings Initialization
+# Embeddings
 embeddings = HuggingFaceEmbeddings(
-    model_name="all-MiniLM-L6-v2"  # lightweight, cloud-friendly
+    model_name="all-MiniLM-L6-v2"
 )
 
 # Upload PDF
@@ -40,6 +32,8 @@ if uploaded_file is not None:
     query = st.text_input("Ask something about your PDF:")
     
     if query:
-        chain = create_retrieval_chain(llm=llm, retriever=retriever)
-        response = chain.run(query)
-        st.write(response)
+        # Minimal retrieval without LLM
+        docs = retriever.get_relevant_documents(query)
+        st.write("Top relevant chunk(s):")
+        for d in docs:
+            st.write(d.page_content)
