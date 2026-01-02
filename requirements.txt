@@ -1,5 +1,6 @@
 streamlit
 langchain-community
+langchain-openai
 PyPDF2
 openai
 pdfplumber
