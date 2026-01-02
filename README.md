@@ -1,6 +1,6 @@
-# MiRAG: My Intelligent RAG 🤖
+# RAG_CHATBOT: My Intelligent RAG 🤖
 
-MiRAG is a personal Retrieval-Augmented Generation (RAG) chatbot. It processes your specific documents and answers questions with high accuracy using LLaMA-3.
+RAG_CHATBOT is a personal Retrieval-Augmented Generation (RAG) chatbot. It processes your specific documents and answers questions with high accuracy using LLaMA-3.
 
 ## 🚀 Features
 - **Fast Retrieval:** Uses FAISS and MiniLM for semantic search.
