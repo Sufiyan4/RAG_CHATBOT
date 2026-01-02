@@ -1,4 +1,5 @@
 streamlit
+langchain-community
 pdfplumber
 tavily-python
 groq==0.11.0
