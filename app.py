@@ -66,7 +66,7 @@ def create_knowledge_base(pdfs, key):
 
     # Embed & Store: Convert text to math (vectors) and save in FAISS
     embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
+    model_name="all-MiniLM-L6-v2"  # smaller model, install-friendly
     )
     vectorstore = FAISS.from_documents(final_chunks, embeddings)
     return vectorstore.as_retriever()
