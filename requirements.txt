@@ -1,5 +1,7 @@
 streamlit
 langchain-community
+PyPDF2
+openai
 pdfplumber
 tavily-python
 groq==0.11.0
