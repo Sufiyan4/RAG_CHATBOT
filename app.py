@@ -12,28 +12,35 @@ st.title("📘 Academic Policy Manual Chatbot")
 
 PDF_PATH = "Academic-Policy-Manual-for-Students2.pdf"
 
+# Enter your OpenAI API Key
 openai_key = st.text_input("Enter OpenAI API Key", type="password")
 
 if openai_key:
     os.environ["OPENAI_API_KEY"] = openai_key
 
+    # Load PDF
     loader = PyPDFLoader(PDF_PATH)
     documents = loader.load()
 
+    # Split PDF into chunks
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=1000,
         chunk_overlap=200
     )
     chunks = splitter.split_documents(documents)
 
+    # Create embeddings
     embeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
 
+    # Create vector store
     vectorstore = FAISS.from_documents(chunks, embeddings)
 
+    # OpenAI LLM (NO langchain_openai)
     llm = OpenAI(temperature=0)
 
+    # RAG Chain
     qa = RetrievalQA.from_chain_type(
         llm=llm,
         retriever=vectorstore.as_retriever()
